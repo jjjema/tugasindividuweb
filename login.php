@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>LOGIN</h1>
-    <form action="about.html" method="post" enctype="multipart/form-data">
+    <form action="about.php" method="post" enctype="multipart/form-data">
         <label for="email">Email : </label> <br>
         <input type="email" name="email" > <br> <br>
         <label for="password">Password : </label> <br>
