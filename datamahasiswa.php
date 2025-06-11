@@ -4,21 +4,21 @@
 
     // ada 4 parameter : localhost, username (root), password, nama database (di local host perhatikan port nya, kalo port default 3306 gini "localhost" kalo portnya beda bukan 3306 gini "localhost:8111" )
     //buat variabel dulu biar efektif ngoding pas if nya jd singkat (ini mirip class di css)
-    $koneksi = mysqli_connect("localhost:8111", "root", "", "webif");
+    //$koneksi = mysqli_connect("localhost:8111", "root", "", "webif");
 
     //cara mengecek kalo udh connect blm ke database
-    if(!$koneksi)
-    {
-        die("Koneksi Gagal!" .mysqli_connect_error());
-    }
-    else
-    {
-        echo "Koneksi Berhasil!";
-    }
+    //if(!$koneksi)
+    //{
+        //die("Koneksi Gagal!" .mysqli_connect_error());
+    //}
+    //else
+    //{
+        //echo "Koneksi Berhasil!";
+    //}
 
-    $query = "SELECT * FROM mahasiswa";
+    //$query = "SELECT * FROM mahasiswa";
 
-    $result = mysqli_query($koneksi, $query); //ini adalah objek 
+    //$result = mysqli_query($koneksi, $query); //ini adalah objek 
     
     // echo gabisa menampilkan objek 
     // echo $result; *coding
@@ -32,12 +32,21 @@
     // var_dump($mhs->nama); *codingan buat objek 
 
     //cara ngambil data yg muncul cuma 1 yg paling atas 
-    $mhs = mysqli_fetch_row($result);
+    //$mhs = mysqli_fetch_row($result);
     
     //kalo mau nampilin 1 data aja 
     //var_dump($mhs[1]); *coding ([1] ini id nya)
     ////var_dump($mhs["nama"]); *coding ([1] ini index nya) kalo mau nampilin nama aja 
-    var_dump($mhs[1]);
+    //var_dump($mhs[1]);
+
+    //while ($mhs = mysqli_fetch_assoc($result))
+
+    //var_dump($mhs); 
+
+    //kaya css bisa conect di 1 halaman lebih efektif 
+    require 'function.php';
+    $query = "SELECT * FROM mahasiswa";
+    $rows = query($query); //hasilnya wadah dengan isinya 
     
 ?>  
 
@@ -56,11 +65,24 @@
     <table border="1" cellspasing="0" cellpadding="10">
         <tr>
             <th> No </th>
+            <th> Foto </th>
             <th> Nama </th>
             <th> NIM </th>
             <th> Jurusan </th>
             <th> No HP </th>
         </tr>
+        <?php 
+        $i = 1;
+        foreach ($rows as $mhs) { ?>
+        <tr>
+            <td><?= $i ?></td>
+            <td><img src="images/<?=$mhs['foto'];?> "alt="<?=$mhs['nama'];?>"width="100"></td>
+            <td><?= $mhs['nama']; ?></td>
+            <td><?= $mhs['nim']; ?></td>
+            <td><?= $mhs['jurusan']; ?></td>
+            <td><?= $mhs['nohp']; ?></td>
+        </tr>
+        <?php $i++; } ?>
     </table>
 
 
